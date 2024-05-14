@@ -3,7 +3,7 @@
 These steps will get this sample Django application running for you using DigitalOcean.
 This application is the standard [Django Polls Tutorial](https://docs.djangoproject.com/en/3.1/intro/tutorial01/) with an added page at `/`.
 This app uses a Postgres database by default. If you want to change this to use 
-a local sqlite db (this will no persist deployments) then you'll need to set
+a local sqlite db (this will not persist deployments) then you'll need to set
 an environment variable specified below.
 
 **Note: Following these steps will result in charges for the use of DigitalOcean services**
@@ -41,7 +41,7 @@ After forking the repo, you should now be viewing this README in your own github
 1. Once the build completes successfully, click the "Live App" link in the header and you should see your running application in a new tab, displaying the home page.
 1. You will still need to perform the following tasks from the dashboard console to finish setting up your Django application:
     1. Navigate to the console tab
-    1. Run `python manage.py migrate` to perform the initial database migration. You will only need to run this the very first time you deploy your app
+    1. Run `python manage.py migrate` to perform the initial database migration. After setup, you may need to migrate the database again if updated. For this reason, we recommend setting up a [pre-deploy Job](https://docs.digitalocean.com/products/app-platform/how-to/manage-jobs/) to migrate the database, automated to run before each deployment. This method also ensures that the migration happens successfully before serving traffic. If it fails, the old version of the service remains active instead.
     1. Run `python manage.py createsuperuser` and follow the prompts to create a super user to access at `/admin`.
 
 ## Environment Variables ##
